@@ -1,0 +1,26 @@
+{
+  "title": "Math Class",
+  "lessons": [
+    {
+      "id": "lesson1",
+      "title": "Lesson 1",
+      "videoUrl": "https://www.youtube.com/embed/EemjeA2Djjw",
+      "reading": "🕺💃 Let’s Get Moving!\n\nActivity: Fiver Footsteps\n\nStand up and stomp each number as you count by 5s. Ready?\n\n5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60!\n\nNow clap each time you say one of those numbers. Say it faster. Now whisper it like a spy. Now SHOUT it like a superhero.\n\nDid you feel the rhythm? That’s the beat of 5s. You just skip-counted your way through the 5 times tables!",
+      "quiz": {
+        "question": "What is 2 + 2?",
+        "answerType": "text"
+      }
+    },
+    {
+      "id": "lesson2",
+      "title": "Lesson 2",
+      "videoUrl": "https://www.youtube.com/embed/1PzW8LwH7CU",
+      "reading": "Now it’s time to count by 6s!\n\nActivity: Six-Step Hop\n\nHop in place and count out loud by sixes: 6, 12, 18, 24, 30, 36, 42, 48, 54, 60.\n\nTry hopping faster or slower. Can you count backward by sixes? Great job!\n\nYou’re on your way to mastering the 6 times tables.",
+      "quiz": {
+        "question": "What is 3 x 4?",
+        "answerType": "multipleChoice",
+        "options": ["7", "12", "14"]
+      }
+    }
+  ]
+}
