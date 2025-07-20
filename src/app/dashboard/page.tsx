@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { onAuthStateChanged, signOut, User } from "firebase/auth";
-import { auth } from "../../lib/firebase";
+import { auth } from "../../../lib/firebase";
 import { SitKittenMascot } from "@/components/mascots/SitKittenMascot";
 
 type Assignment = {
@@ -237,6 +237,10 @@ export default function Dashboard() {
           {logoutError}
         </p>
       )}
+       <div className="bg-blue-500 text-white p-4">
+      Hello Tailwind!
     </div>
+    </div>
+    
   );
 }

@@ -1,27 +1,33 @@
 "use client";
 
 import { useState, FormEvent, ChangeEvent } from "react";
+import { auth } from "../../../lib/firebase";
+import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../lib/firebase";
 import Link from "next/link";
+import { OwlMascot } from "@/components/mascots/OwlMascot";
+import { KittenMascot } from "@/components/mascots/KittenMascot";
 
-export default function Register() {
-  const router = useRouter();
+
+
+
+export default function Login() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
+      await signInWithEmailAndPassword(auth, email, password);
       router.push("/dashboard");
     } catch (err: any) {
-      setError("Uh-oh! That didn’t work. Please check your info and try again.");
+      setError("Oops! That didn’t work. Please check your info and try again.");
     } finally {
       setLoading(false);
     }
@@ -40,8 +46,9 @@ export default function Register() {
         textAlign: "center",
       }}
     >
+      <KittenMascot /> 
       <h1 style={{ fontSize: 36, color: "#fbc02d", marginBottom: 20 }}>
-        🎉 Create Your Account 🎉
+        🚀 Welcome Back! 🚀
       </h1>
       <form onSubmit={handleSubmit} style={{ textAlign: "left" }}>
         <label
@@ -80,8 +87,7 @@ export default function Register() {
           value={password}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           required
-          autoComplete="new-password"
-          minLength={6}
+          autoComplete="current-password"
           style={{
             width: "100%",
             padding: "12px 10px",
@@ -130,17 +136,17 @@ export default function Register() {
             if (!loading) e.currentTarget.style.backgroundColor = "#fbc02d";
           }}
         >
-          {loading ? "Loading..." : "Register 📝"}
+          {loading ? "Loading..." : "Login 🔑"}
         </button>
       </form>
 
       <p style={{ marginTop: 25, fontSize: 16, color: "#6a1b9a" }}>
-        Already have an account?{" "}
+        Don’t have an account?{" "}
         <Link
-          href="/login"
+          href="/register"
           style={{ color: "#f9a825", fontWeight: "bold", textDecoration: "underline" }}
         >
-          Login here!
+          Register here!
         </Link>
       </p>
     </div>

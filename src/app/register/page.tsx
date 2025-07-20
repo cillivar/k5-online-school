@@ -1,33 +1,27 @@
 "use client";
 
 import { useState, FormEvent, ChangeEvent } from "react";
-import { auth } from "../../lib/firebase";
-import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../../lib/firebase";
 import Link from "next/link";
-import { OwlMascot } from "@/components/mascots/OwlMascot";
-import { KittenMascot } from "@/components/mascots/KittenMascot";
 
-
-
-
-export default function Login() {
+export default function Register() {
+  const router = useRouter();
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
-  const router = useRouter();
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setError(null);
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      await createUserWithEmailAndPassword(auth, email, password);
       router.push("/dashboard");
     } catch (err: any) {
-      setError("Oops! That didn’t work. Please check your info and try again.");
+      setError("Uh-oh! That didn’t work. Please check your info and try again.");
     } finally {
       setLoading(false);
     }
@@ -46,9 +40,8 @@ export default function Login() {
         textAlign: "center",
       }}
     >
-      <KittenMascot /> 
       <h1 style={{ fontSize: 36, color: "#fbc02d", marginBottom: 20 }}>
-        🚀 Welcome Back! 🚀
+        🎉 Create Your Account 🎉
       </h1>
       <form onSubmit={handleSubmit} style={{ textAlign: "left" }}>
         <label
@@ -87,7 +80,8 @@ export default function Login() {
           value={password}
           onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
           required
-          autoComplete="current-password"
+          autoComplete="new-password"
+          minLength={6}
           style={{
             width: "100%",
             padding: "12px 10px",
@@ -136,17 +130,17 @@ export default function Login() {
             if (!loading) e.currentTarget.style.backgroundColor = "#fbc02d";
           }}
         >
-          {loading ? "Loading..." : "Login 🔑"}
+          {loading ? "Loading..." : "Register 📝"}
         </button>
       </form>
 
       <p style={{ marginTop: 25, fontSize: 16, color: "#6a1b9a" }}>
-        Don’t have an account?{" "}
+        Already have an account?{" "}
         <Link
-          href="/register"
+          href="/login"
           style={{ color: "#f9a825", fontWeight: "bold", textDecoration: "underline" }}
         >
-          Register here!
+          Login here!
         </Link>
       </p>
     </div>
